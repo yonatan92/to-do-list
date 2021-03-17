@@ -1,4 +1,6 @@
-import { DisplayList } from './ItemsList.js'
+import { DisplayList } from './components/DisplayList.js'
+import {ListItem} from './components/listItem.js'
+
 
 console.log('init stage ..');
 // alert('newnewnew');
@@ -26,5 +28,13 @@ mylist.addItem({ content: 'aaa', id: 17 });
 mylist.addItem({ content: 'bbb', id: 18 });
 
 mylist.deleteItem(17);
+let item1 = new ListItem("new1")
+let item2 = new ListItem("new2")
+let item3 = new ListItem("new3")
+mylist.addItem(item1);
+mylist.addItem(item2);
+mylist.addItem(item3);
+mylist.deleteItem(item2.id)
+
 
 console.log(mylist.arrItems);

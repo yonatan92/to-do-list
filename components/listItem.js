@@ -1,6 +1,8 @@
-var uuid = require('uuid');
+// import {uuid} from 'uuid';
+// const uuid = require('uuid')
+let count = 0;
 
-class ListItem {
+export class ListItem {
   #id;
   #content;
   #state;
@@ -9,7 +11,9 @@ class ListItem {
     DONE: Symbol('done'),
   });
   constructor(text) {
-    this.#id = uuid.v4();
+    // this.#id = uuid.v4();
+    this.#id = count;
+    count ++;
     this.#content = text;
     this.#state = this.#stateEnum.ACTIVE;
   }
@@ -32,10 +36,12 @@ class ListItem {
   }
 
   done() {
-    this.state(this.#stateEnum.DONE);
+    this.state =(this.#stateEnum.DONE);
   }
 
   unDone() {
-    this.state(this.#stateEnum.ACTIVE);
+    this.state =(this.#stateEnum.ACTIVE);
   }
 }
+
+console.log("d")

@@ -1,3 +1,5 @@
+
+
 export class DisplayList {
 
     arrItems = [];
@@ -13,11 +15,7 @@ export class DisplayList {
     }
 
     deleteItem(itmId) {
-        for (const [i, item] of this.arrItems.entries()) {
-            if (item.id === itmId) {
-                this.arrItems.splice(i, 1);
-            }
-        }
+       this.arrItems = this.arrItems.filter((itm)=> itmId != itm.id);
     }
 
 }
