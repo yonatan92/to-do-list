@@ -1,5 +1,7 @@
-// import { DisplayList } from './components/DisplayList.js'
-// import {ListItem} from './components/listItem.js'
+import { DisplayList } from './components/DisplayList.js'
+import {ListItem} from './components/listItem.js'
+import {TodoApp} from './components/todoApp.js'
+
 
 // console.log('init stage ..');
 // // alert('newnewnew');
@@ -17,20 +19,12 @@
 //     console.log(document.getElementById("number").value)
 // }
 
-<<<<<<< HEAD
 var btn = document.getElementById('submit');
 // btn.addEventListener('click', func);
 
 // function func() {
 //     console.log(document.getElementById("number").value)
 // }
-=======
-// document.querySelector('.test').textContent = itm1;
-
-// const mylist = new DisplayList();
-// mylist.addItem({ content: 'aaa', id: 17 });
-// mylist.addItem({ content: 'bbb', id: 18 });
->>>>>>> 08e0ceae1cf925524888fdaa55f854ba18a273d5
 
 // mylist.deleteItem(17);
 // let item1 = new ListItem("new1")
@@ -41,7 +35,6 @@ var btn = document.getElementById('submit');
 // mylist.addItem(item3);
 // mylist.deleteItem(item2.id)
 
-<<<<<<< HEAD
 
 // document.querySelector('.test').textContent = itm1;
 
@@ -245,6 +238,3 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
 //prevent creation of empty tasks.
 
 //Shange ed
-=======
-// console.log(mylist.arrItems);
->>>>>>> 08e0ceae1cf925524888fdaa55f854ba18a273d5

@@ -1,10 +1,10 @@
-import { DisplayLisy } from './DisplayList';
-import { ListItem } from './components/listItem.js';
+import { DisplayList } from './DisplayList.js';
+import { ListItem } from './listItem.js';
 const $ = (s, p = document) => p.querySelector(s);
 
-class TodoApp {
+export class TodoApp {
   constructor() {
-    this.displayList = new DisplayLisy();
+    this.displayList = new DisplayList();
     this.activeItems = this.displayList.activeItems();
     this.doneItems = this.displayList.doneItems();
   }
