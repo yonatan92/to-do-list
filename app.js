@@ -1,3 +1,5 @@
+import { DisplayList } from './ItemsList.js'
+
 console.log('init stage ..');
 // alert('newnewnew');
 
@@ -18,3 +20,11 @@ function func() {
 
 
 document.querySelector('.test').textContent = itm1;
+
+const mylist = new DisplayList();
+mylist.addItem({ content: 'aaa', id: 17 });
+mylist.addItem({ content: 'bbb', id: 18 });
+
+mylist.deleteItem(17);
+
+console.log(mylist.arrItems);
