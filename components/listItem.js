@@ -1,4 +1,7 @@
+var uuid = require('uuid');
+
 class ListItem {
+  #id;
   #content;
   #state;
   #stateEnum = Object.freeze({
@@ -6,6 +9,7 @@ class ListItem {
     DONE: Symbol('done'),
   });
   constructor(text) {
+    this.#id = uuid.v4();
     this.#content = text;
     this.#state = this.#stateEnum.ACTIVE;
   }
@@ -22,6 +26,9 @@ class ListItem {
   }
   set state(newState) {
     this.#state = newState;
+  }
+  get id() {
+    return this.#id;
   }
 
   done() {
