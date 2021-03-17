@@ -1,21 +1,25 @@
-
-
 export class DisplayList {
+  arrItems = [];
 
-    arrItems = [];
+  constructor() {}
 
-    constructor() {}
+  get arrItems() {
+    return this.arrItems;
+  }
 
-    get arrItems() {
-        return this.arrItems;
-    }
+  addItem(itm) {
+    this.arrItems.push(itm);
+  }
 
-    addItem(itm) {
-        this.arrItems.push(itm);
-    }
+  deleteItem(itmId) {
+    this.arrItems = this.arrItems.filter((itm) => itmId != itm.id);
+  }
 
-    deleteItem(itmId) {
-       this.arrItems = this.arrItems.filter((itm)=> itmId != itm.id);
-    }
+  activeItems() {
+    return this.arrItems.filter((itm) => itm.status == Symbol('active'));
+  }
 
+  doneItems() {
+    return this.arrItems.filter((itm) => itm.status == Symbol('done'));
+  }
 }
