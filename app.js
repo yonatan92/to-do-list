@@ -2,7 +2,7 @@ import { DisplayList } from './components/DisplayList.js'
 import {ListItem} from './components/listItem.js'
 import {TodoApp} from './components/todoApp.js'
 
-
+let app = new TodoApp()
 // console.log('init stage ..');
 // // alert('newnewnew');
 
@@ -80,6 +80,8 @@ var createNewTaskElement=function(taskString){
 
 	//button.delete
 	var deleteButton=document.createElement("button");//delete button
+	deleteButton.addEventListener('click', ()=>{listItem.style.display = "none"});
+
 
 	label.innerText=taskString;
 
@@ -125,43 +127,43 @@ const addTask=function(){
 
 //Edit an existing task.
 
-var editTask=function(){
-console.log("Edit Task...");
-console.log("Change 'edit' to 'save'");
+// var editTask=function(){
+// console.log("Edit Task...");
+// console.log("Change 'edit' to 'save'");
 
 
-var listItem=this.parentNode;
+// var listItem=this.parentNode;
 
-var editInput=listItem.querySelector('input[type=text]');
-var label=listItem.querySelector("label");
-var containsClass=listItem.classList.contains("editMode");
-		//If class of the parent is .editmode
-		if(containsClass){
+// var editInput=listItem.querySelector('input[type=text]');
+// var label=listItem.querySelector("label");
+// var containsClass=listItem.classList.contains("editMode");
+// 		//If class of the parent is .editmode
+// 		if(containsClass){
 
-		//switch to .editmode
-		//label becomes the inputs value.
-			label.innerText=editInput.value;
-		}else{
-			editInput.value=label.innerText;
-		}
+// 		//switch to .editmode
+// 		//label becomes the inputs value.
+// 			label.innerText=editInput.value;
+// 		}else{
+// 			editInput.value=label.innerText;
+// 		}
 
-		//toggle .editmode on the parent.
-		listItem.classList.toggle("editMode");
-}
-
-
+// 		//toggle .editmode on the parent.
+// 		listItem.classList.toggle("editMode");
+// }
 
 
-//Delete task.
-var deleteTask=function(){
-		console.log("Delete Task...");
 
-		var listItem=this.parentNode;
-		var ul=listItem.parentNode;
-		//Remove the parent list item from the ul.
-		ul.removeChild(listItem);
 
-}
+// //Delete task.
+// var deleteTask=function(){
+// 		console.log("Delete Task...");
+
+// 		var listItem=this.parentNode;
+// 		var ul=listItem.parentNode;
+// 		//Remove the parent list item from the ul.
+// 		ul.removeChild(listItem);
+
+// }
 
 
 //Mark task completed
@@ -208,7 +210,8 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
 			//Bind editTask to edit button.
 			editButton.onclick=editTask;
 			//Bind deleteTask to delete button.
-			deleteButton.onclick=deleteTask;
+			// deleteButton.onclick=deleteTask;
+			deleteButton.addEventListener('click', ()=>{console.log('detlete butnnn');});
 			//Bind taskCompleted to checkBoxEventHandler.
 			checkBox.onchange=checkBoxEventHandler;
 }
@@ -231,10 +234,3 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
 // 	}
 
 
-
-
-// Issues with usabiliy don't get seen until they are in front of a human tester.
-
-//prevent creation of empty tasks.
-
-//Shange ed
