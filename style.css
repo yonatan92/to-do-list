@@ -35,7 +35,7 @@ body {
     border: 0px;
     color: #888;
     font-size: 15px;
-    width: 60px;
+    /* width: 60px; */
     margin: 10px 0 0;
     font-family: Lato, sans-serif;
     cursor: pointer;
@@ -124,4 +124,17 @@ body {
   
   ul li.editMode label {
     display:none;
+  }
+
+  #btn-add {
+    border: 1px solid grey;
+    padding: 0;
+    margin-left: 1%;
+    /* background-color: red; */
+    /* width: 0; */
+    padding: 1%;
+  }
+
+  .check {
+    text-decoration-line: line-through;
   }
