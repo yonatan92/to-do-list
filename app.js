@@ -1,35 +1,170 @@
-// import { DisplayList } from './components/DisplayList.js'
-// import {ListItem} from './components/listItem.js'
+import { DisplayList } from './components/DisplayList.js'
+import {ListItem} from './components/listItem.js'
+import {TodoApp} from './components/todoApp.js'
 
-// console.log('init stage ..');
-// // alert('newnewnew');
+let app = new TodoApp()
 
-// localStorage.setItem('itm1', 'homework');
-// localStorage.setItem('itm2', 'going to gym');
 
-// let itm1 = localStorage.getItem('itm1');
-// console.log('my itm: ', itm1);
+const mylist = new DisplayList();
+mylist.addItem({ content: 'aaa', id: 17 });
+mylist.addItem({ content: 'bbb', id: 18 });
 
-// var btn = document.getElementById('submit');
-// btn.addEventListener('click', func);
+mylist.deleteItem(17);
+let item1 = new ListItem("new1")
+let item2 = new ListItem("new2")
+let item3 = new ListItem("new3")
+mylist.addItem(item1);
+mylist.addItem(item2);
+mylist.addItem(item3);
+mylist.deleteItem(item2.id)
 
-// function func() {
-//     console.log(document.getElementById("number").value)
-// }
+console.log(mylist.arrItems);
 
-// document.querySelector('.test').textContent = itm1;
+console.log('start here: !!!');
 
-// const mylist = new DisplayList();
-// mylist.addItem({ content: 'aaa', id: 17 });
-// mylist.addItem({ content: 'bbb', id: 18 });
+//Event handling, uder interaction is what starts the code execution.
 
-// mylist.deleteItem(17);
-// let item1 = new ListItem("new1")
-// let item2 = new ListItem("new2")
-// let item3 = new ListItem("new3")
-// mylist.addItem(item1);
-// mylist.addItem(item2);
-// mylist.addItem(item3);
-// mylist.deleteItem(item2.id)
+const userInput=document.querySelector("#new-task");//user input box for new task content
+const addButton=document.querySelector("#btn-add");//first add button
+const mainTaskList=document.querySelector("#tasks-list");//ul of list-tasks
+const completedTasksButton = document.querySelector(".c-btn");
+const unCompletedTasksButton = document.querySelector(".uc-btn");
+const allTasksButton = document.querySelector(".all-btn");
 
-// console.log(mylist.arrItems);
+
+// event binding to completed btn to show only completed tasks
+completedTasksButton.addEventListener('click', ()=>{
+	console.log('completed tesks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		console.log(itm.classList);
+		if(itm.classList.contains('unmarked-item')) {
+			itm.style.display = "none";
+
+		} else {
+			itm.style.display = "list-item";
+		}
+		
+	}
+	
+});
+
+// event binding to uncompleted btn to show only uncompleted tasks
+unCompletedTasksButton.addEventListener('click', ()=>{
+	console.log('unCompleted tasks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		console.log(itm.classList);
+		if(itm.classList.contains('marked-item')) {
+			itm.style.display = "none"
+		} else {
+			itm.style.display = "list-item";
+		}
+		
+	}
+
+});
+
+// event binding show all tasks
+allTasksButton.addEventListener('click', ()=>{
+	console.log('all tasks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		itm.style.display = "list-item";
+	}
+});
+
+//New task list item
+function createNewTaskElement (taskString) {
+
+	var listItem=document.createElement("li");
+	listItem.classList.add('unmarked-item');
+
+	//input (checkbox)
+	var checkBox=document.createElement("input");//checkbx
+	//label
+	var label=document.createElement("label");//label
+	//input (text)
+	var editInput=document.createElement("input");//text
+	//button.edit
+	// var editButton=document.createElement("button");//edit button
+
+	//button.delete
+	var deleteButton=document.createElement("button");//delete button
+	deleteButton.addEventListener('click', ()=>{listItem.remove()});
+
+
+	label.innerText=taskString;
+
+	//Each elements, needs appending
+	checkBox.type="checkbox";
+	editInput.type="text";
+
+	// editButton.innerText="Edit";//innerText encodes special characters, HTML does not.
+	// editButton.className="edit";
+	deleteButton.innerText="Delete";
+	deleteButton.className="delete";
+
+	checkBox.addEventListener('click', ()=>{
+		console.log('clicked check box');
+		// listItem.style.textDecorationLine = "line-through"; 
+		// listItem.style.backgroundColor = 'red';
+		// label.style.textDecorationLine = "line-through";
+		// label.style.color = 'gray';
+		if (!label.classList.length) {
+			label.classList.add('marked-task');
+			listItem.classList.remove('unmarked-item');
+			listItem.classList.add('marked-item');		
+		} else if(label.classList.contains('marked-task')){
+			label.classList.remove('marked-task');
+			label.classList.add('unmarked-task');
+			listItem.classList.remove('marked-item');
+			listItem.classList.add('unmarked-item');		
+
+		} else {
+			label.classList.remove('unmarked-task');
+			label.classList.add('marked-task');
+			listItem.classList.remove('unmarked-item');
+			listItem.classList.add('marked-item');
+		}
+
+		console.log(listItem.classList); 
+	});
+
+	//and appending.
+	listItem.appendChild(checkBox);
+	listItem.appendChild(label);
+	listItem.appendChild(editInput);
+	// listItem.appendChild(editButton);
+	listItem.appendChild(deleteButton);
+	return listItem;
+}
+
+
+
+function addTask() {
+
+    if (userInput.value) {
+
+	console.log("Add Task...");
+    //Create a new list item with the text from the #new-task:
+    console.log('user input => ', userInput.value);
+    var listItem=createNewTaskElement(userInput.value);
+    
+
+	//Append listItem to TaskList
+	mainTaskList.appendChild(listItem);
+	// bindTaskEvents(listItem, taskCompleted);
+
+    userInput.value="";
+
+    }
+}
+
+
+// ++ adds event listener to Add button -> create a new task li
+addButton.addEventListener("click", addTask);
+
