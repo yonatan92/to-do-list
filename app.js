@@ -3,40 +3,7 @@ import {ListItem} from './components/listItem.js'
 import {TodoApp} from './components/todoApp.js'
 
 let app = new TodoApp()
-// console.log('init stage ..');
-// // alert('newnewnew');
 
-// localStorage.setItem('itm1', 'homework');
-// localStorage.setItem('itm2', 'going to gym');
-
-// let itm1 = localStorage.getItem('itm1');
-// console.log('my itm: ', itm1);
-
-// var btn = document.getElementById('submit');
-// btn.addEventListener('click', func);
-
-// function func() {
-//     console.log(document.getElementById("number").value)
-// }
-
-var btn = document.getElementById('submit');
-// btn.addEventListener('click', func);
-
-// function func() {
-//     console.log(document.getElementById("number").value)
-// }
-
-// mylist.deleteItem(17);
-// let item1 = new ListItem("new1")
-// let item2 = new ListItem("new2")
-// let item3 = new ListItem("new3")
-// mylist.addItem(item1);
-// mylist.addItem(item2);
-// mylist.addItem(item3);
-// mylist.deleteItem(item2.id)
-
-
-// document.querySelector('.test').textContent = itm1;
 
 const mylist = new DisplayList();
 mylist.addItem({ content: 'aaa', id: 17 });
@@ -57,17 +24,67 @@ console.log('start here: !!!');
 
 //Event handling, uder interaction is what starts the code execution.
 
-const userInput=document.querySelector("#new-task");//Add a new task.
+const userInput=document.querySelector("#new-task");//user input box for new task content
 // console.log(userInput);
 const addButton=document.querySelector("#btn-add");//first button
-var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
-var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+const mainTaskList=document.querySelector("#tasks-list");//ul of #incomplete-tasks
+const completedTasksButton = document.querySelector(".c-btn");
+const unCompletedTasksButton = document.querySelector(".uc-btn");
+const allTasksButton = document.querySelector(".all-btn");
 
+
+// var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+
+completedTasksButton.addEventListener('click', ()=>{
+	console.log('completed tesks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		console.log(itm.classList);
+		if(itm.classList.contains('unmarked-item')) {
+			itm.style.display = "none";
+
+		} else {
+			itm.style.display = "list-item";
+		}
+		
+	}
+	
+});
+
+unCompletedTasksButton.addEventListener('click', ()=>{
+	console.log('unCompleted tasks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		console.log(itm.classList);
+		if(itm.classList.contains('marked-item')) {
+			itm.style.display = "none"
+		} else {
+			itm.style.display = "list-item";
+		}
+		
+	}
+
+});
+
+
+
+
+allTasksButton.addEventListener('click', ()=>{
+	console.log('all tasks!!');
+	const currTasksList = document.querySelectorAll('li');
+	console.log(currTasksList);
+	for (const itm of currTasksList) {
+		itm.style.display = "list-item";
+	}
+});
 
 //New task list item
 var createNewTaskElement=function(taskString){
 
 	var listItem=document.createElement("li");
+	listItem.classList.add('unmarked-item');
 
 	//input (checkbox)
 	var checkBox=document.createElement("input");//checkbx
@@ -98,8 +115,26 @@ var createNewTaskElement=function(taskString){
 		console.log('clicked check box');
 		// listItem.style.textDecorationLine = "line-through"; 
 		// listItem.style.backgroundColor = 'red';
-		label.style.textDecorationLine = "line-through";
-		label.style.color = 'gray';
+		// label.style.textDecorationLine = "line-through";
+		// label.style.color = 'gray';
+		if (!label.classList.length) {
+			label.classList.add('marked-task');
+			listItem.classList.remove('unmarked-item');
+			listItem.classList.add('marked-item');		
+		} else if(label.classList.contains('marked-task')){
+			label.classList.remove('marked-task');
+			label.classList.add('unmarked-task');
+			listItem.classList.remove('marked-item');
+			listItem.classList.add('unmarked-item');		
+
+		} else {
+			label.classList.remove('unmarked-task');
+			label.classList.add('marked-task');
+			listItem.classList.remove('unmarked-item');
+			listItem.classList.add('marked-item');
+		}
+
+		console.log(listItem.classList); 
 	});
 
 	//and appending.
@@ -119,12 +154,12 @@ const addTask=function(){
 
 	console.log("Add Task...");
     //Create a new list item with the text from the #new-task:
-    console.log('user text', userInput.value);
+    console.log('user input => ', userInput.value);
     var listItem=createNewTaskElement(userInput.value);
     
 
-	//Append listItem to incompleteTaskHolder
-	incompleteTaskHolder.appendChild(listItem);
+	//Append listItem to TaskList
+	mainTaskList.appendChild(listItem);
 	// bindTaskEvents(listItem, taskCompleted);
 
     userInput.value="";
@@ -133,114 +168,7 @@ const addTask=function(){
     
 }
 
+
+// ++ adds event listener to Add button -> create a new task li
 addButton.addEventListener("click",addTask);
-
-
-//Edit an existing task.
-
-// var editTask=function(){
-// console.log("Edit Task...");
-// console.log("Change 'edit' to 'save'");
-
-
-// var listItem=this.parentNode;
-
-// var editInput=listItem.querySelector('input[type=text]');
-// var label=listItem.querySelector("label");
-// var containsClass=listItem.classList.contains("editMode");
-// 		//If class of the parent is .editmode
-// 		if(containsClass){
-
-// 		//switch to .editmode
-// 		//label becomes the inputs value.
-// 			label.innerText=editInput.value;
-// 		}else{
-// 			editInput.value=label.innerText;
-// 		}
-
-// 		//toggle .editmode on the parent.
-// 		listItem.classList.toggle("editMode");
-// }
-
-
-
-
-// //Delete task.
-// var deleteTask=function(){
-// 		console.log("Delete Task...");
-
-// 		var listItem=this.parentNode;
-// 		var ul=listItem.parentNode;
-// 		//Remove the parent list item from the ul.
-// 		ul.removeChild(listItem);
-
-// }
-
-
-// //Mark task completed
-// var taskCompleted=function(){
-// 		console.log("Complete Task...");
-	
-// 	//Append the task list item to the #completed-tasks
-// 	var listItem=this.parentNode;
-// 	completedTasksHolder.appendChild(listItem);
-// 				bindTaskEvents(listItem, taskIncomplete);
-
-// }
-
-
-// var taskIncomplete=function(){
-// 		console.log("Incomplete Task...");
-// //Mark task as incomplete.
-// 	//When the checkbox is unchecked
-// 		//Append the task list item to the #incomplete-tasks.
-// 		var listItem=this.parentNode;
-// 	incompleteTaskHolder.appendChild(listItem);
-// 			bindTaskEvents(listItem,taskCompleted);
-// }
-
-
-
-
-//The glue to hold it all together.
-
-
-//Set the click handler to the addTask function.
-
-
-
-// var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
-// 	console.log("bind list item events");
-// //select ListItems children
-// 	var checkBox=taskListItem.querySelector("input[type=checkbox]");
-// 	// var editButton=taskListItem.querySelector("button.edit");
-// 	var deleteButton=taskListItem.querySelector("button.delete");
-
-
-// 			//Bind editTask to edit button.
-// 			// editButton.onclick=editTask;
-// 			//Bind deleteTask to delete button.
-// 			// deleteButton.onclick=deleteTask;
-// 			deleteButton.addEventListener('click', ()=>{console.log('detlete butnnn');});
-// 			//Bind taskCompleted to checkBoxEventHandler.
-// 			checkBox.onchange=checkBoxEventHandler;
-// }
-
-// //cycle over incompleteTaskHolder ul list items
-// 	//for each list item
-// 	for (var i=0; i<incompleteTaskHolder.children.length;i++){
-
-// 		//bind events to list items chldren(tasksCompleted)
-// 		bindTaskEvents(incompleteTaskHolder.children[i],taskCompleted);
-// 	}
-
-
-
-
-// // //cycle over completedTasksHolder ul list items
-// // 	for (var i=0; i<completedTasksHolder.children.length;i++){
-// // 	//bind events to list items chldren(tasksIncompleted)
-// // 		bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
-// // 	}
-
 
