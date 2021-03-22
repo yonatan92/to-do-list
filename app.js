@@ -25,16 +25,14 @@ console.log('start here: !!!');
 //Event handling, uder interaction is what starts the code execution.
 
 const userInput=document.querySelector("#new-task");//user input box for new task content
-// console.log(userInput);
-const addButton=document.querySelector("#btn-add");//first button
-const mainTaskList=document.querySelector("#tasks-list");//ul of #incomplete-tasks
+const addButton=document.querySelector("#btn-add");//first add button
+const mainTaskList=document.querySelector("#tasks-list");//ul of list-tasks
 const completedTasksButton = document.querySelector(".c-btn");
 const unCompletedTasksButton = document.querySelector(".uc-btn");
 const allTasksButton = document.querySelector(".all-btn");
 
 
-// var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
-
+// event binding to completed btn to show only completed tasks
 completedTasksButton.addEventListener('click', ()=>{
 	console.log('completed tesks!!');
 	const currTasksList = document.querySelectorAll('li');
@@ -52,6 +50,7 @@ completedTasksButton.addEventListener('click', ()=>{
 	
 });
 
+// event binding to uncompleted btn to show only uncompleted tasks
 unCompletedTasksButton.addEventListener('click', ()=>{
 	console.log('unCompleted tasks!!');
 	const currTasksList = document.querySelectorAll('li');
@@ -68,9 +67,7 @@ unCompletedTasksButton.addEventListener('click', ()=>{
 
 });
 
-
-
-
+// event binding show all tasks
 allTasksButton.addEventListener('click', ()=>{
 	console.log('all tasks!!');
 	const currTasksList = document.querySelectorAll('li');
@@ -81,7 +78,7 @@ allTasksButton.addEventListener('click', ()=>{
 });
 
 //New task list item
-var createNewTaskElement=function(taskString){
+function createNewTaskElement (taskString) {
 
 	var listItem=document.createElement("li");
 	listItem.classList.add('unmarked-item');
@@ -148,7 +145,7 @@ var createNewTaskElement=function(taskString){
 
 
 
-const addTask=function(){
+function addTask() {
 
     if (userInput.value) {
 
@@ -165,10 +162,9 @@ const addTask=function(){
     userInput.value="";
 
     }
-    
 }
 
 
 // ++ adds event listener to Add button -> create a new task li
-addButton.addEventListener("click",addTask);
+addButton.addEventListener("click", addTask);
 
