@@ -1,25 +1,45 @@
 export class DisplayList {
-  arrItems = [];
+  #arrItems;
 
-  constructor() {}
+  constructor() {
+    this.#arrItems = [];
+  }
 
   get arrItems() {
-    return this.arrItems;
+    return this.#arrItems;
+  }
+  set arrItems(newArr) {
+    this.#arrItems = newArr;
   }
 
   addItem(itm) {
     this.arrItems.push(itm);
   }
 
-  deleteItem(itmId) {
-    this.arrItems = this.arrItems.filter((itm) => itmId != itm.id);
-  }
-
   activeItems() {
-    return this.arrItems.filter((itm) => itm.status == Symbol('active'));
+    const ans = this.arrItems.filter(
+      (itm) => itm.state.toString() === Symbol('active').toString()
+    );
+
+    return ans;
   }
 
   doneItems() {
-    return this.arrItems.filter((itm) => itm.status == Symbol('done'));
+    return this.arrItems.filter(
+      (itm) => itm.state.toString() === Symbol('done').toString()
+    );
+  }
+
+  markTaskAsDone(id) {
+    let doneElement = this.arrItems.find((elem) => elem.id == id);
+    doneElement.done();
+  }
+  markTaskAsUnDone(id) {
+    let unDoneElement = this.arrItems.find((elem) => elem.id == id);
+    unDoneElement.unDone();
+  }
+
+  removeElement(id) {
+    this.arrItems = this.arrItems.filter((elem) => elem.id !== id);
   }
 }

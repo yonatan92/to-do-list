@@ -13,7 +13,7 @@ export class ListItem {
   constructor(text) {
     // this.#id = uuid.v4();
     this.#id = count;
-    count ++;
+    count++;
     this.#content = text;
     this.#state = this.#stateEnum.ACTIVE;
   }
@@ -36,12 +36,12 @@ export class ListItem {
   }
 
   done() {
-    this.state =(this.#stateEnum.DONE);
+    this.state = this.#stateEnum.DONE;
+    console.log('done');
   }
 
   unDone() {
-    this.state =(this.#stateEnum.ACTIVE);
+    this.state = this.#stateEnum.ACTIVE;
+    console.log('undone');
   }
 }
-
-console.log("d")
