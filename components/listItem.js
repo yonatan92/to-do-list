@@ -16,6 +16,11 @@ export class ListItem {
     count++;
     this.#content = text;
     this.#state = this.#stateEnum.ACTIVE;
+    this.test = Object.freeze({
+      ACTIVE: Symbol('active'),
+      DONE: Symbol('done'),
+    });
+    // this.test = this.state;
   }
 
   get content() {

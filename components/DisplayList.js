@@ -1,8 +1,8 @@
 export class DisplayList {
   #arrItems;
 
-  constructor() {
-    this.#arrItems = [];
+  constructor(list) {
+    this.#arrItems = list ? list : [];
   }
 
   get arrItems() {
